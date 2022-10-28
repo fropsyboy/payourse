@@ -28,7 +28,9 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "detox": "^19.12.6",
     "detox-expo-helpers": "^0.6.0",
+    "eslint-plugin-detox": "^1.0.0",
     "expo-detox-hook": "^1.0.10",
     "jest-expo": "^46.0.1",
     "react-native-testing-library": "^6.0.0",
