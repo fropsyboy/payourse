@@ -22,8 +22,8 @@ export default {
     topMargin10: {
         marginTop: 10
     },
-    topMargin20: {
-        marginTop: 20
+    topMargin40: {
+        marginTop: 40
     },
     logoSize: {
         width: 140,
@@ -33,5 +33,17 @@ export default {
         width: 24,
         height: 24,
         alignSelf: 'flex-end'
+    },
+    textCenter: {
+        textAlign: 'center'
+    },
+    buttonCenter: {
+        justifyContent: 'center',
+        alignSelf: 'center',
+    },
+    emptySize: {
+        width: 357,
+        height: 353,
+        alignSelf: 'center'
     },
 };
