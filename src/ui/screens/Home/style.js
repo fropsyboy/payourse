@@ -75,6 +75,9 @@ export default {
     modalBackgroundColor: {
         backgroundColor: 'white'
     },
+    spinnerBackgroundColor: {
+        backgroundColor: 'transparent'
+    },
     coinHeader: {
         color: 'black',
         textAlign: "center",

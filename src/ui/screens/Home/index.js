@@ -1,5 +1,5 @@
 import React, { Component, useRef }  from 'react';
-import {ScrollView, View, Image, TouchableOpacity, Text, Modal, Animated } from 'react-native';
+import {ScrollView, View, Image, TouchableOpacity, Text, Modal, Animated, ActivityIndicator } from 'react-native';
 import styles from "./style";
 import logoImage from '../../../../assets/logo.png';
 import menuImage from '../../../../assets/menu.png';
@@ -17,12 +17,20 @@ export default class HomeScreen extends Component {
             profiles: {},
             coin: '',
             modalData: {},
-            resetValue: []
+            resetValue: [],
+            spinnerVisible: false
         };
     }
 
-    componentDidMount = () => {
-        this.getCoinProfile();
+    componentDidMount = async () => {
+        this.setState({
+            spinnerVisible: true
+        })
+        await new Promise(resolve => setTimeout(resolve, 600));
+        await this.getCoinProfile();
+        this.setState({
+            spinnerVisible: false
+        })
     }
     openModal = (item) => {
         this.setState({
@@ -78,9 +86,35 @@ export default class HomeScreen extends Component {
         })
     }
 
+    closeSpinner = () => {
+        this.setState({
+            spinnerVisible: false
+        })
+    }
+
+    openSpinner = () => {
+        this.setState({
+            spinnerVisible: true
+        })
+    }
+
     render() {
         return (
             <View>
+                <Modal
+                    animationType="slide"
+                    transparent={true}
+                    visible={this.state.spinnerVisible}
+                    onRequestClose={this.closeSpinner}
+                    presentationStyle='overFullScreen'
+                >
+                    <View style={[styles.modalTopMargin, styles.spinnerBackgroundColor, styles.centralize]}>
+                        <View style={[styles.container, styles.horizontal]}>
+                            <ActivityIndicator size="large" color="#ff0000" />
+                        </View>
+                    </View>
+                </Modal>
+
                 <Modal
                     animationType="slide"
                     transparent={true}
@@ -89,6 +123,9 @@ export default class HomeScreen extends Component {
                     presentationStyle='overFullScreen'
                 >
                     <View style={[styles.modalTopMargin, styles.modalBackgroundColor, styles.centralize]}>
+                        <Text
+                            testID="welcome"
+                        />
                         <Image source={{uri: `https://ui-avatars.com/api/?rounded=true&format=png&name=${this.state.coin}&background=random&color=2F80ED`}}
                                style={[styles.thumbImage, styles.rightMargin10]}/>
                         <Text style={styles.coinHeader}>
